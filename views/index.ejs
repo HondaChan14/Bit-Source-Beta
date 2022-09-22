@@ -1,0 +1,48 @@
+
+
+<body>
+    <%- include('partials/header') -%>
+    <div class="hero min-h-screen bg-[#695E93]">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+          <div class="text-center lg:text-left">
+            <h2 class="text-5x1 font-bold">Welcome to</h2>
+            <h1 class="text-7xl font-bold text-accent">Bit Source</h1>
+            <h4 class="text-6x1 py-6 ">Your start to in the world of <br> Open Source</h4>
+          </div>
+          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card-body">
+              <div class="form-control">
+                <form class="form-control" action="/login" method = "POST">
+                <h1 class="text-3xl font-bold"> Log in! </h1>
+                <label class="label" for="email">
+                  <span class="label-text">Email</span>
+                </label>
+                <input type="email" placeholder="email" aria-describedby="emailHelp" name="email" id="email" class="input input-bordered" required/>
+              </div>
+              <div class="form-control">
+                <label class="label" for="password">
+                  <span class="label-text">Password</span>
+                </label>
+                <input type="password" placeholder="password" name="password" id="password" class="input input-bordered" required/>
+                <label class="label">
+                  <a href="#" class="label-text-alt link link-hover">Forgot password?</a>
+                </label>
+                <label class="label">
+                    <p>Don't have a login? <a href="/signup" class="label-text-alt link link-hover text-gray-100">Sign Up Here</a></p>
+                  
+                </label>
+              </div>
+              <div class="form-control mt-6">
+                <!-- Login Button -->
+                <button type="submit" class="btn btn-neutral">Login</button>
+              
+              </div>
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <%- include('partials/footer') -%>
+    <script src="js/main.js"></script>
+</body>

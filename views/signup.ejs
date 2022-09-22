@@ -1,0 +1,102 @@
+
+<!-- <body>
+    <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach(el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+    <form action="/signup" method="POST">
+        <input type="text" name="userName" placeholder="User Name">
+        <input type="email" name="email" placeholder="Email">
+        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="confirmPassword" placeholder="Confirm Password">
+        <input type="submit">
+    </form>
+</body> -->
+
+
+<body>
+    <%- include('partials/header') -%>
+    
+    <div class="hero min-h-screen bg-[#695E93]">
+      <% if (locals.messages.errors) { %>
+        <% messages.errors.forEach( el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+    <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+            <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+
+        <div class="hero-content flex-col lg:flex-row-reverse">
+          <div class="text-center lg:text-left">
+            <h1 class="text-3xl font-bold text-accent">Sign Up to begin your adventure!</h1>
+          </div>
+          <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+            <div class="card-body">
+              <form class="form-control" action="/signup" method= "POST">
+              <div class="form-control">
+                <h1 class="text-2xl text-center font-bold"> Sign Up! </h1>
+                <!-- Username -->
+                <label class="label" for="userName">
+                  <span class="label-text">Username</span>
+                </label>
+                <input type="text" placeholder="Username" id="userName" name="userName" class="input input-bordered" />
+                <!-- Username -->
+              </div>
+
+              <!-- First Name --> 
+              <div class="form-control">  
+                <label class="label" for="firstName">
+                  <span class="label-text">First Name</span>
+                </label>
+                <input type="text" placeholder="First Name" id="firstName" name="firstName" class="input input-bordered" />
+              </div>
+              <!-- First Name --> 
+
+              <!-- Last Name --> 
+              <div class="form-control">  
+                <label class="label" for="lastName">
+                  <span class="label-text">Last Name</span>
+                </label>
+                <input type="text" placeholder="Last Name" id="lastname" name="lastName" class="input input-bordered" />
+              </div>
+              <!-- Last Name --> 
+
+              <!-- Email --> 
+              <div class="form-control">  
+                <label class="label" for="exampleInputEmail1">
+                  <span class="label-text">Email</span>
+                </label>
+                <input type="email" placeholder="email" id="exampleInputEmail1" name="email" class="input input-bordered" />
+                
+              </div>
+              <!-- Email --> 
+
+              <!-- Password -->  
+              <div class="form-control">
+                <label class="label" for="confirmPassword">
+                  <span class="label-text">Password</span>
+                </label>
+                <input type="password" placeholder="password" id="confirmPassword" aria-hidden="true" name="confirmPassword" class="input input-bordered" />
+              </div>
+              <!-- Password --> 
+              
+              <!--Button -->
+              <div class="form-control mt-6">
+                <button type="submit" class="btn btn-neutral">Sign Up</button>
+              </div>
+              <!--Button -->
+              </form>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+
+    <%- include('partials/footer') -%>
+  
+    <script src="js/main.js"></script>
+</body>
