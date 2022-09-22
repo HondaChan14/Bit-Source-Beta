@@ -24,6 +24,7 @@ const logger = require('morgan')
 const connectDB = require('./config/database')
 //Connects to the Routes
 const mainRoutes = require('./routes/main')
+const dashRoutes = require('./routes/dashboard')
 const postRoutes = require('./routes/posts')
 const commentRoutes = require("./routes/comment")
 
@@ -72,6 +73,7 @@ app.use(flash())
 
 //Setup Routes For Which The Server Is Listening
 app.use('/', mainRoutes);
+app.use('/dashboard', dashRoutes);
 app.use('/posts', postRoutes);
 app.use("/comments", commentRoutes);
 

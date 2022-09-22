@@ -1,20 +1,4 @@
 
-<!-- <body>
-    <% if (locals.messages.errors) { %>
-        <% messages.errors.forEach(el => { %>
-            <div class="alert alert-danger"><%= el.msg %></div>
-        <% }) %>    
-    <% } %>
-    <form action="/signup" method="POST">
-        <input type="text" name="userName" placeholder="User Name">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="confirmPassword" placeholder="Confirm Password">
-        <input type="submit">
-    </form>
-</body> -->
-
-
 <body>
     <%- include('partials/header') -%>
     
@@ -36,16 +20,18 @@
           </div>
           <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
             <div class="card-body">
-              <form class="form-control" action="/signup" method= "POST">
-              <div class="form-control">
-                <h1 class="text-2xl text-center font-bold"> Sign Up! </h1>
+              <h1 class="text-2xl text-center font-bold"> Sign Up! </h1>
+
+              <form action="/signup" method= "POST">
+            
                 <!-- Username -->
+              <div class="form-control">
                 <label class="label" for="userName">
                   <span class="label-text">Username</span>
                 </label>
                 <input type="text" placeholder="Username" id="userName" name="userName" class="input input-bordered" />
-                <!-- Username -->
               </div>
+              <!-- Username -->
 
               <!-- First Name --> 
               <div class="form-control">  
@@ -70,19 +56,28 @@
                 <label class="label" for="exampleInputEmail1">
                   <span class="label-text">Email</span>
                 </label>
-                <input type="email" placeholder="email" id="exampleInputEmail1" name="email" class="input input-bordered" />
+                <input type="email" placeholder="Email" id="exampleInputEmail1" name="email" class="input input-bordered" />
                 
               </div>
               <!-- Email --> 
 
               <!-- Password -->  
               <div class="form-control">
-                <label class="label" for="confirmPassword">
+                <label class="label" for="password">
                   <span class="label-text">Password</span>
                 </label>
-                <input type="password" placeholder="password" id="confirmPassword" aria-hidden="true" name="confirmPassword" class="input input-bordered" />
+                <input type="password" placeholder="Password" id="password" aria-hidden="true" name="password" class="input input-bordered" />
               </div>
               <!-- Password --> 
+
+              <!-- Confirm Password -->  
+              <div class="form-control">
+                <label class="label" for="confirmPassword">
+                  <span class="label-text">Confirm Password</span>
+                </label>
+                <input type="password" placeholder="Password" id="confirmPassword" aria-hidden="true" name="confirmPassword" class="input input-bordered" />
+              </div>
+              <!-- COnfirm Password --> 
               
               <!--Button -->
               <div class="form-control mt-6">

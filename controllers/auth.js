@@ -4,9 +4,9 @@ const User = require('../models/User')
 
  exports.getLogin = (req, res) => {
     if (req.user) {
-      return res.redirect('/posts')
+      return res.redirect('/dashboard')
     }
-    res.render('login', {
+    res.render('index', {
       title: 'Login'
     })
   }
@@ -18,7 +18,7 @@ const User = require('../models/User')
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('/login')
+      return res.redirect('/index')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
@@ -26,12 +26,12 @@ const User = require('../models/User')
       if (err) { return next(err) }
       if (!user) {
         req.flash('errors', info)
-        return res.redirect('/login')
+        return res.redirect('/index')
       }
       req.logIn(user, (err) => {
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/posts')
+        res.redirect(req.session.returnTo || '/dashboard')
       })
     })(req, res, next)
   }
@@ -47,7 +47,7 @@ const User = require('../models/User')
   
   exports.getSignup = (req, res) => {
     if (req.user) {
-      return res.redirect('/signup')
+      return res.redirect('/dashnoard')
     }
     res.render('signup', {
       title: 'Create Account'
@@ -89,7 +89,7 @@ const User = require('../models/User')
           if (err) {
             return next(err)
           }
-          res.redirect('/posts')
+          res.redirect('/dashboard')
         })
       })
     })
