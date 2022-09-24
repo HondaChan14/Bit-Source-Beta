@@ -47,7 +47,7 @@ const User = require('../models/User')
   
   exports.getSignup = (req, res) => {
     if (req.user) {
-      return res.redirect('/dashnoard')
+      return res.redirect('/dashboard')
     }
     res.render('signup', {
       title: 'Create Account'
