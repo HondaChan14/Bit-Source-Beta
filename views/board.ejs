@@ -1,0 +1,25 @@
+<%- include('partials/header') -%>
+<div class="carousel grid w-3/6 h-80 place-items-center">
+
+  <div id="slide1" class="carousel-item relative w-full">
+    
+    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+      <a href="#slide4" class="btn btn-circle">❮</a> 
+      
+      <% for(let i=0; i<obj.length; i++) {%>
+        <li class="col-6 justify-content-between mt-5">
+          <div class="card-body">
+            <h2 class="card-title"><%= obj[i].title%></h2>
+              <a href="<%= obj[i].htmlUrl%>"></a>
+        </li>
+      <% } %>
+
+  <a href="#slide2" class="btn btn-circle">❯</a>
+    </div>
+  </div> 
+  
+</div>
+<script src="js/main.js"></script>
+    
+    <%- include('partials/footer') -%>
+    

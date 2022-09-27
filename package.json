@@ -1,7 +1,7 @@
 {
   "name": "todo-mvc-auth-local",
   "version": "1.0.0",
-  "description": "A Simple ToDo App is built using the MVC Architecture, we have also implemented \"authorization\" so folx can sign up, customize & personalize the app",
+  "description": "",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
@@ -11,6 +11,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
+    "@octokit/rest": "^19.0.4",
     "bcrypt": "^5.0.1",
     "connect-mongo": "^3.2.0",
     "daisyui": "^2.28.0",
@@ -23,6 +24,7 @@
     "mongodb": "^3.6.5",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",
+    "octokit": "^2.0.7",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
     "validator": "^13.6.0"
