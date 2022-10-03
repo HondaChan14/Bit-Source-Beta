@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const fetch = require("node-fetch")
+// Using npm install node-fetch@2 as it supports require() older verisons use Import
 const { Octokit, App } = require("octokit");
 require('dotenv').config({path: './config/.env'})
 
@@ -16,57 +18,20 @@ const octokit = new Octokit({
 module.exports = {
 
   getBoard: async (req,res)=>{
-    //console.log(req.user)
-    try{
-      let obj = {}
-
-    // List the top 100 JavaScript repos sorted by stars.
-    let resp = await octokit.rest.search.repos({
-        q: "language:javascript",
-        order: "asc",
-        per_page: 100,
-    })
-
-    // Iterate over each of the repos we received. We use a for loop here
-    // instead of forEach because we still need to await inside.
-    for (let i = 0; i < resp.data.items.length; i++) {
-
-        // List all the open issues that are labeled with "good first issue".
-        let issues = await octokit.rest.issues.listForRepo({
-            owner: resp.data.items[i].owner.login,
-            repo: resp.data.items[i].name,
-            state: "open",
-            labels: "good first issue",
-            per_page: 100,
-        })
-
-        // Iterate over each of the issues we received (ignoring pull requests)
-        // and print out its HTML URL. We use a for loop here instead of
-        // forEach because we still need to await inside.
-        for (let i = 0; i < issues.data.length; i++) {
-            if ("pull_request" in issues.data[i]) {
-                continue
-            }
-            
-            obj[i] = {
-            issueId : issues.data[i].id || "N/A",
-            title : issues.data[i].title,
-            creator : issues.data[i].user.login,
-            htmlUrl : issues.data[i].html_url,
-          }
-          //console.log(obj)
-            //console.log(issues.data[i].html_url)
-            // obj[`${issues.data[i].id}`] = issues.data[i].id
-            // obj[`${issues.data[i].title}`] = issues.data[i].title
-            // obj[`${issues.data[i].labels}`] = issues.data[i].labels
-            // obj[`${issues.data[i].login}`] = issues.data[i].login
-            // obj[`${issues.data[i].html_url}`] = issues.data[i].html_url
-        }
-        
-    }
-    //console.log(Object.keys(obj).length)
-    res.render('board.ejs', { user: req.user, obj: obj })
+     try{
+       const info = await fetch(
+        `https://api.github.com/search/issues?q=javascript+label:"good+first+issue"+is:"open"no:assignee&per_page=100`
+      )
+      .then((response) => response.json())
+      .then((data) => {
+          const issues = data.items.filter(e => !e["pull_request"])
+          const recentIssues = issues.sort((a,b) => new Date(b.created_at) - new Date(a.created_at))
+          const filter = recentIssues.filter(e => e["assignee"] === null)
+          res.render('board.ejs', { user: req.user, data: filter})
+          //console.log(data)
       console.log("Welcome to the Source Board")
+      })
+    
     }catch(err){
         console.log(err)
     }

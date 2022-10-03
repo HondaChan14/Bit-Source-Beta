@@ -1,24 +1,36 @@
 <%- include('partials/header') -%>
-<div class="carousel grid w-3/6 h-80 place-items-center">
 
-  <div id="slide1" class="carousel-item relative w-full">
+<section class="px-96 dark:bg-gray-900">
+  <div class=" px-6 py-10">
     
-    <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-      <a href="#slide4" class="btn btn-circle">❮</a> 
-      
-      <% for(let i=0; i<obj.length; i++) {%>
-        <li class="col-6 justify-content-between mt-5">
-          <div class="card-body">
-            <h2 class="card-title"><%= obj[i].title%></h2>
-              <a href="<%= obj[i].htmlUrl%>"></a>
-        </li>
-      <% } %>
+      <h1 class="text-3xl text-center font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">Good First Bit Source JavaScript</h1>
+   
+      <ul class="row list-unstyled">
+        <% for(let i = 0; i< data.length; i++) {%>
+          <li class="col-6 justify-content-between mt-5">
+            <div class="card w-full bg-accent shadow-xl">
+              <div class="card-body">
 
-  <a href="#slide2" class="btn btn-circle">❯</a>
-    </div>
-  </div> 
-  
-</div>
+                <div class="flex flex-row">
+              <h2 class=" card-title"><%= data[i].title.toUpperCase()%></h2>
+              <button type="button" id="favorite" class="absolute top-0 right-0 h-16 w-14 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center">
+                <i class="fa-solid fa-code-commit"></i>
+              </button>
+            </div>
+              <span>Issue Number: <%= data[i].number %></span>
+              <span class="truncate block">Issue Description: <%= data[i].body %></span>
+              <span>Created Date: <%= new Date(data[i].created_at).toLocaleDateString("en-US") %></span>
+              <a href="<%= data[i].html_url %>">GitHub Issue</a>
+          
+          </div>
+            </div>
+          </li>
+        <% } %>
+      </ul>
+
+    </div>   
+<section>  
+
 <script src="js/main.js"></script>
     
     <%- include('partials/footer') -%>

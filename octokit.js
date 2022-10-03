@@ -17,13 +17,18 @@ module.exports = {
 getData: async (req, res) => {
 
     let obj = {}
-
+    console.log(obj)
     // List the top 100 JavaScript repos sorted by stars.
     let resp = await octokit.rest.search.repos({
         q: "language:javascript",
+        state: "open",
+        label:"good first issue",
+        type: "issue",
         order: "asc",
         per_page: 10,
+        page: 1,
     })
+    console.log(resp)
 
     // Iterate over each of the repos we received. We use a for loop here
     // instead of forEach because we still need to await inside.
@@ -35,8 +40,10 @@ getData: async (req, res) => {
             repo: resp.data.items[i].name,
             state: "open",
             labels: "good first issue",
-            per_page: 10,
+            per_page: 1,
+            page: 1,
         })
+        console.log(issues)
 
         // Iterate over each of the issues we received (ignoring pull requests)
         // and print out its HTML URL. We use a for loop here instead of
