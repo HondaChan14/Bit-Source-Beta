@@ -26,8 +26,6 @@ const connectDB = require('./config/database')
 const mainRoutes = require('./routes/main')
 const dashRoutes = require('./routes/dashboard')
 const boardRoutes = require('./routes/board')
-const postRoutes = require('./routes/posts')
-const commentRoutes = require("./routes/comment")
 
 
 
@@ -68,7 +66,6 @@ app.use(
   )
 
 
-  
 // Passport middleware
 app.use(passport.initialize())
 app.use(passport.session())
@@ -76,14 +73,10 @@ app.use(passport.session())
 //Use flash messages for errors, info, ect...
 app.use(flash())
 
-
-
 //Setup Routes For Which The Server Is Listening
 app.use('/', mainRoutes);
 app.use('/dashboard', dashRoutes);
 app.use('/board', boardRoutes);
-app.use('/posts', postRoutes);
-app.use("/comments", commentRoutes);
 
 
 //Server Running

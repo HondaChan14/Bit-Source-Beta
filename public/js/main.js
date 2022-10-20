@@ -1,26 +1,50 @@
-const favorite = document.querySelector("#favorite");
+const commit = document.querySelectorAll("#commit");
+const deleteBtn = document.querySelectorAll("#deleteBtn")
 
-Array.from(favorite).forEach((element)=>{
-    element.addEventListener('click', addFavorite)
+Array.from(commit).forEach((element)=>{
+    element.addEventListener('click', addCommit)
 })
 
-async function addFavorite() {
+Array.from(deleteBtn).forEach((element)=>{
+    element.addEventListener('click', deleteCommit)
+})
+
+async function addCommit() {
     const itemTitle = this.parentNode.childNodes[1].innerText
-    const itemLink =  this.parentNode.childNodes[1].innerText
-    console.log(itemTitle)
-    console.log(itemLink)
+    const parent = this.parentNode
+    const itemLink =  parent.parentNode.childNodes[9].href
+    // console.log(itemTitle)
+    // console.log(itemLink)
     try{
-        const response = await fetch('addFavorite', {
-            method: 'get',
+        const response = await fetch('board', {
+            method: 'post',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
                 'title': itemTitle, 'link': itemLink
             })
           })
         const data = await response.json()
-        console.log(data)
+        // console.log(data)
         location.reload()
 
+    }catch(err){
+        console.log(err)
+    }
+}
+
+async function deleteCommit(){
+    const commitId = this.parentNode.dataset.id
+    try{
+        const response = await fetch('board/deleteCommit', {
+            method: 'delete',
+            headers: {'Content-type': 'application/json'},
+            body: JSON.stringify({
+                '_id': commitID
+            })
+        })
+        const data = await response.json()
+        console.log(data)
+        location.reload()
     }catch(err){
         console.log(err)
     }

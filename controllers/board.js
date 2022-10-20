@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Commited = require("../models/Commited")
 const fetch = require("node-fetch")
 // Using npm install node-fetch@2 as it supports require() older verisons use Import
 const { Octokit, App } = require("octokit");
@@ -34,6 +35,15 @@ module.exports = {
     
     }catch(err){
         console.log(err)
+    }
+  },
+  postCommited: async (req, res) => {
+    try{
+      await Commited.create({title: req.body.title, link: req.body.link, completed: false, userId: req.user.id})
+      console.log('Commit has been added!')
+      res.redirect('/board')
+    }catch(err){
+      console.log(err)
     }
   },
 

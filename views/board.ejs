@@ -1,37 +1,51 @@
 <%- include('partials/header') -%>
 
-<section class="px-96 dark:bg-gray-900">
-  <div class=" px-6 py-10">
-    
-      <h1 class="text-3xl text-center font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">Good First Bit Source JavaScript</h1>
-   
-      <ul class="row list-unstyled">
-        <% for(let i = 0; i< data.length; i++) {%>
-          <li class="col-6 justify-content-between mt-5">
-            <div class="card w-full bg-accent shadow-xl">
-              <div class="card-body">
+<section class="min-h-screen px-10 bg-base-300">
+<!-- HEADER ----------------------->
+  <div class="px-6 py-10">
+    <h1 class="text-3xl text-center font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">
+      Good First Bit Source JavaScript
+    </h1>
+  </div>
+<!-- END OF HEADER --------------->
 
-                <div class="flex flex-row">
-              <h2 class=" card-title"><%= data[i].title.toUpperCase()%></h2>
-              <button type="button" id="favorite" class="absolute top-0 right-0 h-16 w-14 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center">
-                <i class="fa-solid fa-code-commit"></i>
+<!-- BODY ------------------------>
+  <div>
+    <ul class="row list-unstyled md:mx-32 xl:mx-96">
+      <% for(let i = 0; i< data.length; i++) {%>
+      <li class="col-6 justify-content-between mt-5">
+        <div class="card min-w-full bg-primary shadow-xl text-zinc-300 hover:bg-success hover:text-neutral">
+          <div class="card-body font-bold">
+            <div class="flex flex-row">
+              <h2 class="card-title font-semibold"><%= data[i].title.toUpperCase()%></h2>
+              <button
+                type="button"
+                id="commit"
+                class="absolute top-0 right-0 h-16 w-14 bg-grey-light hover:bg-grey text-grey-darkest font-bold py-2 px-4 rounded inline-flex items-center "
+              >
+                <i class="fa-solid fa-code-commit rounded-lg hover:bg-error"></i>
               </button>
+            
+            <!-- Repo Cards Data ------------->
             </div>
               <span>Issue Number: <%= data[i].number %></span>
-              <span class="truncate block">Issue Description: <%= data[i].body %></span>
+              <span class="truncate block">Issue Description: <%= data[i].body || 'N/A'%></span>
               <span>Created Date: <%= new Date(data[i].created_at).toLocaleDateString("en-US") %></span>
               <a href="<%= data[i].html_url %>">GitHub Issue</a>
-          
-          </div>
             </div>
-          </li>
-        <% } %>
-      </ul>
+            <!-- End of Repo Cards Data ----->
+        </div>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+<!-- END OF BODY ------------->
 
-    </div>   
-<section>  
-
-<script src="js/main.js"></script>
-    
+<!-- FOOTER ------------------>
+<section class="text-center">
+    <script src="js/main.js"></script>
     <%- include('partials/footer') -%>
-    
+</section>
+<!-- END OF FOOTER ---------->
+
+</section>
