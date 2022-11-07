@@ -10,6 +10,15 @@ const User = require('../models/User')
       title: 'Login'
     })
   }
+
+  exports.getGuestLogin = (req, res) => {
+    if (req.user) {
+      return res.redirect('/board')
+    }
+    res.render('index', {
+      title: 'Login'
+    })
+  }
   
   exports.postLogin = (req, res, next) => {
     const validationErrors = []
@@ -32,6 +41,21 @@ const User = require('../models/User')
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
         res.redirect(req.session.returnTo || '/dashboard')
+      })
+    })(req, res, next)
+  }
+
+  exports.postGuestLogin = (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+      if (err) { return next(err) }
+      if (!user) {
+        req.flash('errors', info)
+        return res.redirect('/')
+      }
+      req.logIn(user, (err) => {
+        if (err) { return next(err) }
+        req.flash('success', { msg: 'Success! You are logged in.' })
+        res.redirect(req.session.returnTo || '/board')
       })
     })(req, res, next)
   }

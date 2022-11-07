@@ -2,19 +2,9 @@ const User = require("../models/User");
 const Commited = require("../models/Commited")
 const fetch = require("node-fetch")
 // Using npm install node-fetch@2 as it supports require() older verisons use Import
-const { Octokit, App } = require("octokit");
-require('dotenv').config({path: './config/.env'})
 
-// Get the GitHub token from the GITHUB_TOKEN environment variable.
-const githubToken = process.env.GITHUB_TOKEN
-if(!githubToken) {
-  throw new Error("Error")
-}
 
-// Create a new octokit API client.
-const octokit = new Octokit({
-    auth: githubToken,
-});
+;
 
 module.exports = {
 

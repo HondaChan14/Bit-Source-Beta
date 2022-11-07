@@ -1,20 +1,22 @@
+
 const commit = document.querySelectorAll("#commit");
-const deleteBtn = document.querySelectorAll("#deleteBtn")
+const deleteButton = document.querySelectorAll("#deleteBtn")
 
 Array.from(commit).forEach((element)=>{
     element.addEventListener('click', addCommit)
 })
 
-Array.from(deleteBtn).forEach((element)=>{
+Array.from(deleteButton).forEach((element)=>{
     element.addEventListener('click', deleteCommit)
 })
+
 
 async function addCommit() {
     const itemTitle = this.parentNode.childNodes[1].innerText
     const parent = this.parentNode
     const itemLink =  parent.parentNode.childNodes[9].href
-    // console.log(itemTitle)
-    // console.log(itemLink)
+    //console.log(itemTitle)
+    //console.log(itemLink)
     try{
         const response = await fetch('board', {
             method: 'post',
@@ -22,9 +24,9 @@ async function addCommit() {
             body: JSON.stringify({
                 'title': itemTitle, 'link': itemLink
             })
-          })
+        })
         const data = await response.json()
-        // console.log(data)
+        //console.log(data)
         location.reload()
 
     }catch(err){
@@ -33,18 +35,18 @@ async function addCommit() {
 }
 
 async function deleteCommit(){
-    const commitId = this.parentNode.dataset.id
+    const commitId = this.dataset.id
     try{
-        const response = await fetch('board/deleteCommit', {
+        const response = await fetch('dashboard/deleteCommit', {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                '_id': commitID
+                'idFromMainJs': commitId
             })
         })
-        const data = await response.json()
-        console.log(data)
-        location.reload()
+        if(response.status === 200){
+            this.closest("li").remove()
+        }
     }catch(err){
         console.log(err)
     }

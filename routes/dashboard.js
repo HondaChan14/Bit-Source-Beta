@@ -7,5 +7,5 @@ const {ensureAuth, ensureGuest} = require('../middleware/auth')
 
 router.get('/', ensureAuth, dashController.getDash)
 router.get('/logout', authController.logout)
-router.delete('/deleteCommit', ensureAuth, dashController.deleteCommited)
+router.delete('/deleteCommit', dashController.deleteCommited)
 module.exports = router
